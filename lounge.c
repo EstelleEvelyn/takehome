@@ -36,6 +36,7 @@ void mathProfArrive() {
 void csProfArrive() {
   pthread_mutex_lock(&lock);
   while((sign != CS && sign != EMPTY) || waitingDeans != 0) {
+    printf("waitin for a cs");
     pthread_cond_wait(&enterLounge, &lock);
   }
   if (sign == EMPTY) {
@@ -52,6 +53,7 @@ void deanArrive() {
   waitingDeans++;
   // pthread_mutex_unlock(&lock);
   while(sign != DEAN && sign != EMPTY) {
+    printf("waiting on a dean");
     pthread_cond_wait(&enterLounge, &lock);
   }
   if (sign == EMPTY) {
