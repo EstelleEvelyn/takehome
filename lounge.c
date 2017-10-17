@@ -70,7 +70,7 @@ void mathProfLeave() {
   if(occupancy == 0) {
     sign = EMPTY;
   }
-  pthread_cond_signal(&enterLounge);
+  pthread_cond_broadcast(&enterLounge);
   pthread_mutex_unlock(&lock);
   return;
 }
@@ -81,7 +81,7 @@ void csProfLeave() {
   if(occupancy == 0) {
     sign = EMPTY;
   }
-  pthread_cond_signal(&enterLounge);
+  pthread_cond_broadcast(&enterLounge);
   pthread_mutex_unlock(&lock);
   return;
 }
@@ -92,7 +92,7 @@ void deanLeave() {
   if(occupancy == 0) {
     sign = EMPTY;
   }
-  pthread_cond_signal(&enterLounge);
+  pthread_cond_broadcast(&enterLounge);
   pthread_mutex_unlock(&lock);
   return;
 }
