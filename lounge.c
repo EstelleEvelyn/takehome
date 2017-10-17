@@ -24,10 +24,10 @@ void mathProfArrive() {
   while((sign != MATH && sign != EMPTY) || waitingDeans != 0) {
     pthread_cond_wait(&enterLounge, &lock);
   }
-  occupancy++;
-  if (occupancy == 1) {
+  if (sign == EMPTY) {
     sign = MATH;
   }
+  occupancy++;
   pthread_cond_signal(&enterLounge);
   pthread_mutex_unlock(&lock);
   return;
@@ -38,10 +38,10 @@ void csProfArrive() {
   while((sign != CS && sign != EMPTY) || waitingDeans != 0) {
     pthread_cond_wait(&enterLounge, &lock);
   }
-  occupancy++;
-  if (occupancy == 1) {
+  if (sign == EMPTY) {
     sign = CS;
   }
+  occupancy++;
   pthread_cond_signal(&enterLounge);
   pthread_mutex_unlock(&lock);
   return;
@@ -54,10 +54,10 @@ void deanArrive() {
   while(sign != DEAN && sign != EMPTY) {
     pthread_cond_wait(&enterLounge, &lock);
   }
-  occupancy++;
-  if (occupancy == 1) {
+  if (sign == EMPTY) {
     sign = DEAN;
   }
+  occupancy++;
   waitingDeans--;
   pthread_cond_signal(&enterLounge);
   pthread_mutex_unlock(&lock);
